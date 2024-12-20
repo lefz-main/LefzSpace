@@ -1,0 +1,3 @@
+#omdat ik weet dat jij alles klaar gaat zetten met pybuilder enzo ga ik dat niet voor jou doen; je heb vast je eigen manier. dus ik heb ff de req's hierin gezet
+fastapi
+uvicorn
