@@ -19,10 +19,11 @@ public class httpPythonClient {
         this.client = HttpClient.newHttpClient();
     }
 
-    String LOCALbaseURL = "http://localhost:8080";   //TODO Intergrate main site
+    String LOKAALbaseURL = "http://localhost:8089";   //TODO Intergrate main site
 
     public String getMessage() {
-        String url = "http://localhost:8080/test";
+        //TODO Make generiek
+        String url = "http://localhost:8089/test";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
@@ -31,9 +32,9 @@ public class httpPythonClient {
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
-                jsonResponseTransformerHelper ResponseTransformer = new jsonResponseTransformerHelper();
-                Object jsonOutput = ResponseTransformer.jsonTransformer(response);
-                return (String) jsonOutput;
+                ObjectMapper objectMapper = new ObjectMapper();
+                ResponseModel responseModel = objectMapper.readValue(response.body(), ResponseModel.class);
+                return responseModel.getBericht();
             } else {
                 return "Error: " + response.statusCode();   //TODO make test for this
             }
@@ -41,6 +42,28 @@ public class httpPythonClient {
             e.printStackTrace();
             return "Error: " + e.getMessage();
         }
+    }
+
+    public String tryLogin(String mailaddres, String password){
+        String url = LOKAALbaseURL + "/tryLogin?mail=" + mailaddres + "&password=" + password;
+        System.out.println(url);
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
+
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                ResponseModel responseModel = objectMapper.readValue(response.body(), ResponseModel.class);
+               return responseModel.getBericht();
+            } else {
+                return "Error: " + response.statusCode();   //TODO make test for this
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error: " + e.getMessage();
+        }
+
+
     }
 
     //JSON-response

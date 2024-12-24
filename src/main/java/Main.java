@@ -8,5 +8,8 @@ public class Main {
 
         String json = client.getMessage();
         System.out.println(json);
+
+        String loginResponse = client.tryLogin("test1", "123");
+        System.out.println(loginResponse);
     }
 }
