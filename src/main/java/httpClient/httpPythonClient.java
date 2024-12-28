@@ -10,9 +10,7 @@ public class httpPythonClient {
     private final HttpClient client;
 
     //testen met een gemockte HttpClient
-    public httpPythonClient(HttpClient client) {
-        this.client = client;
-    }
+    public httpPythonClient(HttpClient client) {this.client = client;}
 
     // voor productiegebruik
     public httpPythonClient() {
@@ -60,12 +58,9 @@ public class httpPythonClient {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error: " + e.getMessage();
+            return "Error: " + e.getMessage();  //TODO make Tests
         }
-
-
     }
-
     //JSON-response
     static class ResponseModel {
         private String bericht;
