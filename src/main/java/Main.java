@@ -1,15 +1,22 @@
 import httpClient.httpPythonClient;
+import com.formdev.flatlaf.FlatLightLaf;
+import gui.LoginPage;
 
-import java.io.IOException;
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        httpPythonClient client = new httpPythonClient();
 
-        String json = client.getMessage();
-        System.out.println(json);
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        String loginResponse = client.tryLogin("test1", "123");
-        System.out.println(loginResponse);
+        // Roep de loginpagina aan
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            LoginPage.createLoginFrame().setVisible(true);
+        });
+
     }
 }
