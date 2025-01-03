@@ -9,11 +9,11 @@ import java.awt.event.ActionEvent;
 public class LoginPage {
 
     public static JFrame createLoginFrame() {
-        // Maak het hoofdframe
-        JFrame frame = new JFrame("Lefz E-mail Client - Login");
+        //hoofdframe
+        JFrame frame = new JFrame("Student Email Client - Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
-        frame.setLocationRelativeTo(null); //Centreer
+        frame.setLocationRelativeTo(null); //Center
 
         //Hoofdpanel
         JPanel panel = new JPanel();
@@ -23,7 +23,7 @@ public class LoginPage {
         gbc.insets = new Insets(10, 10, 10, 10);
 
         //Titel
-        JLabel titleLabel = new JLabel("Lefz Students Mail Login");
+        JLabel titleLabel = new JLabel("Login");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gbc.gridx = 0;
@@ -31,7 +31,7 @@ public class LoginPage {
         gbc.gridwidth = 2;
         panel.add(titleLabel, gbc);
 
-        // Gebruikersnaam label en veld
+        //Gebruikersnaam label en veld
         JLabel usernameLabel = new JLabel("Email:");
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -44,7 +44,7 @@ public class LoginPage {
         gbc.anchor = GridBagConstraints.LINE_START;
         panel.add(usernameField, gbc);
 
-        // Wachtwoord label en veld
+        //Wachtwoord label en veld
         JLabel passwordLabel = new JLabel("Password:");
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -56,7 +56,7 @@ public class LoginPage {
         gbc.anchor = GridBagConstraints.LINE_START;
         panel.add(passwordField, gbc);
 
-        // Login-knop
+        //Login-knop
         JButton loginButton = new JButton("Login");
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -67,13 +67,15 @@ public class LoginPage {
             String password = new String(passwordField.getPassword());
             if (validateCredentials(username, password)) {
                 JOptionPane.showMessageDialog(frame, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                AppLauncher.loginSuccessful(); //Meld aan AppLauncher dat de login is geslaagd
+                frame.dispose(); //Sluit het loginvenster
             } else {
                 JOptionPane.showMessageDialog(frame, "Invalid email or password.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
         panel.add(loginButton, gbc);
 
-        // Voeg panel toe aan het frame
+        //Voeg panel toe aan het frame
         frame.add(panel);
         return frame;
     }
