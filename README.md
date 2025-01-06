@@ -1,4 +1,5 @@
 # LefzSpace
-e-mail client for students
+open source e-mail client for students
+lefz.nl 
 
 ong ong
